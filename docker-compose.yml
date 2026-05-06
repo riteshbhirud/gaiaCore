@@ -19,11 +19,11 @@
 
 services:
   gaiacore-db:
-    build: .
-    image: gaiacore:latest
+    build: ../gaiaDB
+    image: gaiadb:latest
     container_name: gaiacore-postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       POSTGRES_DB: gaiacore
       POSTGRES_USER: postgres
@@ -31,7 +31,6 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
 #      - gaiacore-data:/var/lib/postgresql/data
-      - ./sql:/sql
       - ./test/omop:/csv
       - ./test/data_source:/data
     healthcheck:
