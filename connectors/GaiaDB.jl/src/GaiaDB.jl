@@ -34,10 +34,12 @@ _unwrap(v) = v
 function list_locations(base_url::AbstractString;
                         city::Union{AbstractString,Nothing} = nothing,
                         state::Union{AbstractString,Nothing} = nothing,
+                        county::Union{AbstractString,Nothing} = nothing,
                         limit::Int = 1000)
     params = Dict{String,String}("limit" => string(limit))
-    !isnothing(city)  && (params["city"]  = "eq.$city")
-    !isnothing(state) && (params["state"] = "eq.$state")
+    !isnothing(city)   && (params["city"]   = "eq.$city")
+    !isnothing(state)  && (params["state"]  = "eq.$state")
+    !isnothing(county) && (params["county"] = "eq.$county")
     _to_dataframe(_get(base_url, "location"; schema = "working", params))
 end
 
